@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "Defender for Chrome",
+  "version": "1.0",
+  "description": "Restrict file downloads",
+  "permissions": [
+    "notifications",
+    "downloads", 
+    "scripting", "activeTab",
+    "storage"
+  ],
+
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Download Filter"
+  },
+
+  "host_permissions": ["<all_urls>"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+
+  "web_accessible_resources": [
+    {
+      "resources": ["clipboard-blacklist.json"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
