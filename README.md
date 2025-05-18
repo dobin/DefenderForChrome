@@ -1,25 +1,25 @@
 # DefenderForChrome
 
-Chrome Plugin for additional security. 
+Chrome Plugin for additional security against some social engineering attacks:
 
-* File download whitelist (`.txt`, `.jpg`, ...)
-* Clipboard copy blacklist (`powershell.exe`, `mshta.exe`, ...)
+* File download whitelist (`.txt`, `.jpg`, ...) for HTML smuggling
+* Clipboard copy blacklist (`powershell.exe`, `mshta.exe`, ...) for ClickFix
 
 
 ## Purpose
 
 This Chrome plugin implements a **whitelist for file extensions**
 on file download. This protects against HTML smuggling and other
-file based initial access techniques (like `.js`, `.vbs`, `.exe`). 
+file based initial access techniques for execbait (like `.js`, `.vbs`, `.exe`).
 
 With this plugin coorporate environments are able to to implement a file
 download policy in the browser. As a replacement for content filter
 proxy, when moving towards zero trust. Allowed file extensions are defined in `file-whitelist.json`.
 
 There is also a **clipboard blacklist** against the commonly
-used "press win-r, paste and enter" with copied powershell
-commands. The `clipboard-blacklist.json` contains a list 
-of obviously malicious strings like `powershell.exe` or `mshta.exe`.
+used ClickFix execbait attack ("press win-r, paste malicious commands, press enter"). 
+The `clipboard-blacklist.json` contains a list 
+of obviously malicious strings like `powershell` or `mshta`.
 
 
 ## Installation for testing
