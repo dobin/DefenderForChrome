@@ -2,41 +2,37 @@
 
 Chrome Plugin for additional security. 
 
-* File download whitelist/blacklist
-* Copy text blacklist ("powershell.exe" and more)
+* File download whitelist (`.txt`, `.jpg`, ...)
+* Clipboard copy blacklist (`powershell.exe`, `mshta.exe`, ...)
 
 
 ## Purpose
 
-Chrome does not implement a fine-grained file download whitelist. 
-This plugin allows coorporate environments to implement a file
-download policy on the browser. Allowed file extensions 
-are defined in `file-whitelist.json`.
+This Chrome plugin implements a **whitelist for file extensions**
+on file download. This protects against HTML smuggling and other
+file based initial access techniques (like `.js`, `.vbs`, `.exe`). 
 
-With the policy in the browser, it is not required to have a
-content-filter in between, for example when moving towards 
-zero trust. 
+With this plugin coorporate environments are able to to implement a file
+download policy in the browser. As a replacement for content filter
+proxy, when moving towards zero trust. Allowed file extensions are defined in `file-whitelist.json`.
 
-This makes it harder for attackers to gain initial access with
-common files like `.js`, `.vbs`, `.exe` etc.
-
-There is also a clipboard blacklist against the commonly
+There is also a **clipboard blacklist** against the commonly
 used "press win-r, paste and enter" with copied powershell
 commands. The `clipboard-blacklist.json` contains a list 
-of obviously malicious strings. 
+of obviously malicious strings like `powershell.exe` or `mshta.exe`.
 
 
 ## Installation for testing
 
-1) Open chrome://extensions
-2) Enable "Developer mode"
-3) Click "Load unpacked" and select this git repo directory
+1) Open `chrome://extensions`
+2) Enable `Developer mode`
+3) Click `Load unpacked` and select this git repo directory
 
 
 ## Configuration
 
-* file-whitelist.json: Define allowed file extensions here
-* clipboard-blacklist.json: Define prohibited words here
+* `file-whitelist.json`: Define allowed file extensions here
+* `clipboard-blacklist.json`: Define prohibited words here
 
 Both are case insensitive.
 
@@ -54,13 +50,21 @@ Both are case insensitive.
 
 ### File Download Filtering
 
-Implemented in background.js.
+Implemented in `background.js`.
 
 Using chrome functionality. 
 
 
 ### Clipboard Filtering
 
-Implemented in content.js. 
+Implemented in `content.js`. 
 
 Injected into every page. 
+
+
+## Related Work
+
+[SmuggleShield](https://github.com/RootUp/SmuggleShield) tried to prevent HTML smuggling with machine learning, instead of just filtering file downloads. 
+
+[ClipShield](https://github.com/ericlaw1979/clipshield) is a watchdog
+which scans the clipboard for malicious things.

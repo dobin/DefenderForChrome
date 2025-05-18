@@ -1,5 +1,6 @@
 [
-    "powershell.exe",
-    "mshta.exe",
-    "forbidden"
+    "powershell",
+    "mshta",
+    "cmd",
+    "msiexec"
 ]
